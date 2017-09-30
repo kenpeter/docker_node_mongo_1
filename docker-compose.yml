@@ -1,0 +1,22 @@
+version: "2"
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    volumes:
+      - ./:/app
+  
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes_from:
+      - mongodata
+  
+  mongodata:
+    image: tianon/true
+    volumes:
+      - /data/mongodb/docker_node_mongo_1_db
